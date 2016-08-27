@@ -16,6 +16,14 @@ AssertCmdInstallation() {
     fi
 }
 
+InstallTmux() {
+    echo "Downloading libevent..."
+    wget https://github.com/libevent/libevent/releases/download/release-2.0.22-stable/libevent-2.0.22-stable.tar.gz -P /tmp
+
+    echo "Downloading Tmux source..."
+    wget https://github.com/tmux/tmux/releases/download/2.2/tmux-2.2.tar.gz -P /tmp
+}
+
 echo "Updating package sources..."
 
 sudo apt-get update
@@ -27,6 +35,12 @@ AssertCmdInstallation gcc;
 AssertCmdInstallation g++;
 AssertCmdInstallation git;
 AssertCmdInstallation python;
+
+if hash tmux 2>/dev/null; then
+    echo "+ tmux command was already installed....\t\tOK"
+else
+    InstallTmux
+fi
 
 exit 0;
 
