@@ -95,6 +95,7 @@ AssertCmdInstallation perl perl;
 AssertCmdInstallation w3m w3m;
 AssertCmdInstallation cmake cmake;
 AssertCmdInstallation elinks elinks;
+AssertCmdInstallation zsh zsh;
 
 echo "Install ncurses library"
 sudo apt-get install libncurses5-dev libncursesw5-dev
