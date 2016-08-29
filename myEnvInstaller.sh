@@ -82,6 +82,7 @@ sudo apt-get update
 echo "Installing basic packages..."
 
 AssertCmdInstallation wget wget;
+AssertCmdInstallation curl curl;
 AssertCmdInstallation gcc gcc;
 AssertCmdInstallation g++ g++;
 AssertCmdInstallation git git;
@@ -96,6 +97,11 @@ AssertCmdInstallation w3m w3m;
 AssertCmdInstallation cmake cmake;
 AssertCmdInstallation elinks elinks;
 AssertCmdInstallation zsh zsh;
+
+if ! [ -e ~/.antigen.zsh ]; then
+    echo "Install Antigen"
+    curl https://cdn.rawgit.com/zsh-users/antigen/v1.0.4/antigen.zsh > ~/.antigen.zsh
+fi
 
 echo "Install ncurses library"
 sudo apt-get install libncurses5-dev libncursesw5-dev
