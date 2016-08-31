@@ -54,25 +54,9 @@ InstallTmux() {
     sudo make install
 }
 
-InstallVim(){
-    if ! [ -d ~/src/vim ]; then
-        cd ~/src
-        git clone https://github.com/vim/vim.git
-    fi
-    cd ~/src/vim
-    echo "Compile VIM..."
-    ./configure --with-features=huge \
-            --enable-multibyte \
-            --enable-rubyinterp \
-            --enable-pythoninterp \
-            --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu \
-            --enable-python3interp \
-            --with-python3-config-dir=/usr/lib/python3.5/config-x86_64-linux-gnu \
-            --enable-perlinterp \
-            --enable-luainterp \
-            --enable-gui=no --enable-cscope --prefix=/usr
-    make VIMRUNTIMEDIR=/usr/share/vim/vim74
-    sudo make install
+ConfigureVim() {
+    git clone https://github.com/amix/vimrc.git ~/.vim_runtime
+    sh ~/.vim_runtime/install_awesome_vimrc.sh
 }
 
 echo "Updating package sources..."
@@ -97,6 +81,7 @@ AssertCmdInstallation w3m w3m;
 AssertCmdInstallation cmake cmake;
 AssertCmdInstallation elinks elinks;
 AssertCmdInstallation zsh zsh;
+AssertCmdInstallation vim vim;
 
 if ! [ -e ~/.antigen.zsh ]; then
     echo "Install Antigen"
@@ -107,7 +92,7 @@ echo "Install ncurses library"
 sudo apt-get install libncurses5-dev libncursesw5-dev
 
 echo "Install scripting dev libraries"
-sudo apt-get install python-dev python3-dev ruby-dev lua5.1 lua5.1-dev perl-dev
+sudo apt-get install python-dev python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev
 
 echo "Install libx11 libs"
 sudo apt-get install libx11-dev libxtst-dev
@@ -131,11 +116,7 @@ else
     InstallTmux
 fi
 
-if hash vim 2>/dev/null; then
-    echo "+ vim command was already installed....\t\tOK"
-else
-    InstallVim
-fi
+ConfigureVim
 
 exit 0;
 
