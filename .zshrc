@@ -1,3 +1,4 @@
+############## ZSH CONFIGURATION ################
 # The following lines were added by compinstall
 
 zstyle ':completion:*' auto-description 'specify: %d'
@@ -31,10 +32,15 @@ unsetopt autocd
 bindkey -v
 # End of lines configured by zsh-newuser-install
 
+################ ZSH PLUGINS ######################
 source ~/.antigen.zsh
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle robbyrussell/oh-my-zsh plugins/ruby
 antigen bundle git
 antigen use oh-my-zsh
 antigen theme bira
+
+######## Env vars & Other config ##################
+export VISUAL=vim
+export EDITOR=vim
 
