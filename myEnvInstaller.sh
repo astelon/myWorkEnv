@@ -45,7 +45,6 @@ InstallTmux() {
 
     cd ~/src
 
-
     tar -zxf /tmp/tmux-2.2.tar.gz
     cd tmux-2.2
     ./autogen.sh
@@ -55,8 +54,42 @@ InstallTmux() {
 }
 
 ConfigureVim() {
-    git clone https://github.com/amix/vimrc.git ~/.vim_runtime
-    sh ~/.vim_runtime/install_awesome_vimrc.sh
+    echo "Configuring Vim..."
+    if ! [ -d ~/.vim_runtime ]; then
+        cd ~
+        git clone https://github.com/amix/vimrc.git ~/.vim_runtime
+        sh ~/.vim_runtime/install_awesome_vimrc.sh
+        echo "set exrc"   >> ~/.vimrc;
+        echo "set secure" >> ~/.vimrc;
+        echo "set nu!"    >> ~/.vimrc;
+        echo "set relativenumber" >> ~/.vimrc;
+
+        if [ -d ~/.vim_runtime/sources_non_forked/syntastic ]; then
+            echo "Removing syntastic..."
+            rm -rf ~/.vim_runtime/sources_non_forked/syntastic
+        fi
+    else
+        echo "+ Amix vimrc was already installed..... \t\tOK!"
+    fi
+
+    if ! [ -d ~/.vim_runtime/sources_non_forked/YouCompleteMe ]; then
+        echo "Installing YouCompleteMe..."
+        cd ~/.vim_runtime/sources_non_forked/
+        git clone https://github.com/Valloric/YouCompleteMe.git YouCompleteMe
+        cd YouCompleteMe
+        echo "Updating dependencies for YouCompleteMe..."
+        git submodule update --init --recursive
+        python3 ~/.vim_runtime/sources_non_forked/YouCompleteMe/install.py --clang-completer
+    else
+        echo "+ YouCompleteMe vim plugin was already installed ... OK!"
+    fi
+
+    if ! [ -d ~/.vim_runtime/sources_non_forked/YCM-Generator ]; then
+        cd ~/.vim_runtime/sources_non_forked/
+        git clone https://github.com/rdnetto/YCM-Generator.git YCM-Generator
+    else
+        echo "+ YCM-Generator vim plugin was already installed ... OK!"
+    fi
 }
 
 echo "Updating package sources..."
