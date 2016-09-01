@@ -1,0 +1,32 @@
+""""""""""""""""""""""""""""""''"""""""
+"""" VIM RC project template file  """"
+"""" Rename this file to .vimrc    """"
+"""""""""""""""""""""""""""""""""""""""
+
+""" Spaces configuration """
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set noexpandtab
+
+""" Set Color column """
+set colorcolumn=80
+highlight ColorColumn ctermbg=darkgray
+
+""" If working on a C project you may want vim to treat .h files as C code """
+augroup project
+    autocmd!
+    " Use a doxygen subtype
+    autocmd BufRead,BufNewFile *.h,*.c set filetype=c.doxygen
+augroup END
+
+""" Path to look for files (include dirs etc) """
+let &path.="include,/usr/include/AL,"
+
+""" Configure Build System """
+set makeprg=make\ -C\ ../build\ -j9
+""" If you want a hot key for this... ! prevents vim from jumping to the first error """
+nnoremap <F4> :make!<cr>
+
+""" Configure Launch System """
+nnoremap <F5> :!./my_great_program<cr>
