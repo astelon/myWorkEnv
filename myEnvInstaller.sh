@@ -82,6 +82,11 @@ AssertCmdInstallation cmake cmake;
 AssertCmdInstallation elinks elinks;
 AssertCmdInstallation zsh zsh;
 AssertCmdInstallation vim vim;
+AssertCmdInstallation ctags ctags;
+AssertCmdInstallation cscope cscope;
+
+echo "Install Build essential"
+sudo apt-get install build-essential
 
 if ! [ -e ~/.antigen.zsh ]; then
     echo "Install Antigen"
