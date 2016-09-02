@@ -1,5 +1,8 @@
 #!/bin/sh
 
+export install_cmd="sudo apt-get install"
+export update_cmd="sudo apt-get update"
+
 # $1 is the command to install
 # $2 is the package name
 AssertCmdInstallation() {
@@ -7,7 +10,7 @@ AssertCmdInstallation() {
         echo "+ "$1" command was already installed....\t\tOK"
     else
         echo "+ Installing "$2" ..."
-	sudo apt-get install $2
+	$install_cmd $2
         if hash $1 2>/dev/null; then
             echo "+ "$1" command installed successfully! ....\t\tOK";
         else
@@ -94,7 +97,7 @@ ConfigureVim() {
 
 echo "Updating package sources..."
 
-sudo apt-get update
+$update_cmd
 
 echo "Installing basic packages..."
 
@@ -119,7 +122,7 @@ AssertCmdInstallation ctags ctags;
 AssertCmdInstallation cscope cscope;
 
 echo "Install Build essential"
-sudo apt-get install build-essential
+$install_cmd build-essential
 
 if ! [ -e ~/.antigen.zsh ]; then
     echo "Install Antigen"
@@ -127,19 +130,19 @@ if ! [ -e ~/.antigen.zsh ]; then
 fi
 
 echo "Install ncurses library"
-sudo apt-get install libncurses5-dev libncursesw5-dev
+$install_cmd libncurses5-dev libncursesw5-dev
 
 echo "Install scripting dev libraries"
-sudo apt-get install python-dev python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev
+$install_cmd python-dev python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev
 
 echo "Install libx11 libs"
-sudo apt-get install libx11-dev libxtst-dev
+$install_cmd libx11-dev libxtst-dev
 
 if hash ranger 2>/dev/null; then
     echo "+ ranger command was already installed....\t\tOK"
 else
     echo "+ Installing ranger ..."
-    sudo apt-get install ranger caca-utils highlight poppler-utils mediainfo
+    $install_cmd ranger caca-utils highlight poppler-utils mediainfo
     if hash ranger 2>/dev/null; then
         echo "+ ranger command installed successfully! ....\t\tOK";
     else
