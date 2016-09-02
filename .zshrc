@@ -44,3 +44,4 @@ antigen theme bira
 export VISUAL=vim
 export EDITOR=vim
 
+export PATH=$HOME/.vim_runtime/sources_non_forked/YouCompleteMe/third_party/ycmd/clang_archives/bin:$PATH

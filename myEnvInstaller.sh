@@ -92,6 +92,11 @@ ConfigureVim() {
     if ! [ -d ~/.vim_runtime/sources_non_forked/YCM-Generator ]; then
         cd ~/.vim_runtime/sources_non_forked/
         git clone https://github.com/rdnetto/YCM-Generator.git YCM-Generator
+		cd ~/.vim_runtime/sources_non_forked/YouCompleteMe/third_party/ycmd/clang_archives/
+		mkdir bin
+		cd bin
+        ls .. | grep tar | sed 's/\.tar.*//' | xargs -ifile tar -xf ../file.tar.xz file/bin --strip=2
+		# echo "export PATH=\$HOME/.vim_runtime/sources_non_forked/YouCompleteMe/third_party/ycmd/clang_archives/bin:$PATH" >> ~/.zshrc
     else
         echo "+ YCM-Generator vim plugin was already installed ... OK!"
     fi
