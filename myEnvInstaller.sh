@@ -83,6 +83,8 @@ ConfigureVim() {
         echo "Updating dependencies for YouCompleteMe..."
         git submodule update --init --recursive
         python3 ~/.vim_runtime/sources_non_forked/YouCompleteMe/install.py --clang-completer
+        echo "\"\"\" Use a default ycm extra conf file if needed \"\"\"" >> ~/.vimrc
+        echo "let g:ycm_global_ycm_extra_conf = '~/.vim_runtime/sources_non_forked/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'" >> ~/.vimrc
     else
         echo "+ YouCompleteMe vim plugin was already installed ... OK!"
     fi
