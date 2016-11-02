@@ -145,6 +145,16 @@ $install_cmd python-dev python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev
 echo "Install libx11 libs"
 $install_cmd libx11-dev libxtst-dev
 
+AssertCmdInstallation pip python-pip
+
+echo "Install Powerline"
+pip install --user git+https://github.com/powerline/powerline.git
+
+if [ -d "$HOME/.local/bin" ]; then
+    echo "Adding ~/local/bin to path"
+    echo 'PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
+fi
+
 if hash ranger 2>/dev/null; then
     echo "+ ranger command was already installed....\t\tOK"
 else
